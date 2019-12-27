@@ -2,14 +2,17 @@ window.onload = function() {
 
     let liffId = "1653700382-njRd4e6k";
     initializeLiffOrDie(liffId);
+    document.getElementById("stepLIFF").innerHTML = 'window.onload'
 
 };
 
 function initializeLiffOrDie(liffId) {
     if (!liffId) {
+        document.getElementById("liffErrorMessage").innerHTML('error initializeLiffOrDie')
         document.getElementById("liffAppContent").classList.add('hidden');
         document.getElementById("liffErrorMessage").classList.remove('hidden');
     } else {
+        document.getElementById("stepLIFF").innerHTML = 'initializeLiffOrDie'
         initializeLiff(liffId);
     }
 }
@@ -26,16 +29,19 @@ function initializeLiff(liffId) {
         })
         .catch((err) => {
             console.log(err)
+            document.getElementById("liffErrorMessage").innerHTML = err
             document.getElementById("liffAppContent").classList.add('hidden');
             document.getElementById("liffErrorMessage").classList.remove('hidden');
         });
     } else {
+        document.getElementById("stepLIFF").innerHTML = 'initializeLiff Mobile'
         initializeApp();
     }
-
 }
 
 function initializeApp() {
+    document.getElementById("stepLIFF").innerHTML = 'initializeApp'
+    
     displayLiffData();
     // displayIsInClientInfo();
     registerButtonHandlers();
@@ -49,6 +55,7 @@ function initializeApp() {
 }
 
 function displayLiffData() {
+    document.getElementById("stepLIFF").innerHTML = 'displayLiffData'
     document.getElementById('deviceOS').textContent = liff.getOS();
 }
 
