@@ -60,6 +60,8 @@ function displayLiffData() {
 
 function registerButtonHandlers() {
 
+    document.getElementById("stepLIFF").innerHTML = 'registerButtonHandlers'
+
     // get profile call
     document.getElementById('getProfileButton').addEventListener('click', function() {
         liff.getProfile().then(function(profile) {
