@@ -15,7 +15,9 @@ function initializeLiffOrDie(liffId) {
 }
 
 function initializeLiff(liffId) {
-    liff
+
+    if (liff.getOS() == 'web') {
+        liff
         .init({
             liffId: liffId
         })
@@ -27,6 +29,10 @@ function initializeLiff(liffId) {
             document.getElementById("liffAppContent").classList.add('hidden');
             document.getElementById("liffErrorMessage").classList.remove('hidden');
         });
+    } else {
+        initializeApp();
+    }
+
 }
 
 function initializeApp() {
@@ -48,6 +54,59 @@ function displayLiffData() {
 
 function registerButtonHandlers() {
 
+    // get profile call
+    document.getElementById('getProfileButton').addEventListener('click', function() {
+        liff.getProfile().then(function(profile) {
+            document.getElementById('userIdProfileField').textContent = profile.userId;
+            document.getElementById('displayNameField').textContent = profile.displayName;
+
+            const profilePictureDiv = document.getElementById('profilePictureDiv');
+            if (profilePictureDiv.firstElementChild) {
+                profilePictureDiv.removeChild(profilePictureDiv.firstElementChild);
+            }
+            const img = document.createElement('img');
+            img.src = profile.pictureUrl;
+            img.alt = 'Profile Picture';
+            profilePictureDiv.appendChild(img);
+
+            document.getElementById('statusMessageField').textContent = profile.statusMessage;
+
+            const context = liff.getContext();
+            if (context) {
+                document.getElementById('contextTypeProfileField').textContent = context.type;
+                if (context.type == "group") {
+                    document.getElementById('groupIdProfileField').textContent = 'Group ' + context.groupId;
+                } 
+
+                else if (context.type == "room") {
+                    document.getElementById('groupIdProfileField').textContent = 'Room ' + context.roomId;
+                }
+            }
+
+            toggleProfileData();
+        }).catch(function(error) {
+            window.alert('Error getting profile: ' + error);
+        });
+
+        
+        
+    });
+
+    document.getElementById('liffSendMessageButton').addEventListener('click', function() {
+        liff.sendMessages([
+            {
+              type:'text',
+              text:'Thank for order and trust us - MOM Shop'
+            }
+          ])
+          .then(() => {
+            console.log('message sent');
+          })
+          .catch((err) => {
+            console.log('error', err);
+          });
+    })
+
     // login call, only when external browser is used
     document.getElementById('liffLoginButton').addEventListener('click', function() {
         if (!liff.isLoggedIn()) {
@@ -63,4 +122,17 @@ function registerButtonHandlers() {
             window.location.reload();
         }
     });
+}
+
+function toggleProfileData() {
+    toggleElement('profileInfo');
+}
+
+function toggleElement(elementId) {
+    const elem = document.getElementById(elementId);
+    if (elem.offsetWidth > 0 && elem.offsetHeight > 0) {
+        elem.style.display = 'none';
+    } else {
+        elem.style.display = 'block';
+    }
 }
