@@ -8,7 +8,7 @@ window.onload = function() {
 
 function initializeLiffOrDie(liffId) {
     if (!liffId) {
-        document.getElementById("liffErrorMessage").innerHTML('error initializeLiffOrDie')
+        document.getElementById("liffErrorMessage").innerHTML = 'error initializeLiffOrDie'
         document.getElementById("liffAppContent").classList.add('hidden');
         document.getElementById("liffErrorMessage").classList.remove('hidden');
     } else {
@@ -91,10 +91,9 @@ function registerButtonHandlers() {
 
             toggleProfileData();
         }).catch(function(error) {
+            document.getElementById("liffErrorMessage").innerHTML = error
             window.alert('Error getting profile: ' + error);
         });
-
-        
         
     });
 
@@ -109,6 +108,7 @@ function registerButtonHandlers() {
             console.log('message sent');
           })
           .catch((err) => {
+            document.getElementById("liffErrorMessage").innerHTML = err
             console.log('error', err);
           });
     })
