@@ -55,7 +55,6 @@ function initializeApp() {
 }
 
 function displayLiffData() {
-    document.getElementById("stepLIFF").innerHTML = 'displayLiffData'
     document.getElementById('deviceOS').textContent = liff.getOS();
 }
 
