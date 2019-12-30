@@ -82,6 +82,10 @@ function registerButtonHandlers() {
                 else if (context.type == "room") {
                     document.getElementById('groupIdProfileField').textContent = 'Room ' + context.roomId;
                 }
+
+                else if (context.type == "utou") {
+                    document,getElementById('groupIdProfileField').textContent = 'Offi ' + context.utouId;
+                }
             }
 
             toggleProfileData();
