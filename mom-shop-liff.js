@@ -84,7 +84,7 @@ function registerButtonHandlers() {
                 }
 
                 else if (context.type == "utou") {
-                    document,getElementById('groupIdProfileField').textContent = 'Offi ' + context.utouId;
+                    document.getElementById('groupIdProfileField').textContent = 'Offi ' + context.utouId;
                 }
             }
 
