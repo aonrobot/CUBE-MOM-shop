@@ -1,6 +1,6 @@
 window.onload = function() {
 
-    let liffId = "1653700382-njRd4e6k";
+    var liffId = "1653700382-njRd4e6k";
     initializeLiffOrDie(liffId);
 
 };
@@ -18,20 +18,20 @@ function initializeLiffOrDie(liffId) {
 
 function initializeLiff(liffId) {
 
-    // liff
-    //     .init({
-    //         liffId: liffId
-    //     })
-    //     .then(() => {
-    //         initializeApp();
-    //     })
-    //     .catch((err) => {
-    //         console.log(err)
-    //         document.getElementById("liffErrorMessage").innerHTML = err
-    //         document.getElementById("liffAppContent").classList.add('hidden');
-    //         document.getElementById("liffErrorMessage").classList.remove('hidden');
-    //     });
-    initializeApp();
+    liff
+        .init({
+            liffId: liffId
+        })
+        .then(() => {
+            initializeApp();
+        })
+        .catch((err) => {
+            console.log(err)
+            document.getElementById("liffErrorMessage").innerHTML = err
+            document.getElementById("liffAppContent").classList.add('hidden');
+            document.getElementById("liffErrorMessage").classList.remove('hidden');
+        });
+    //initializeApp();
 }
 
 function initializeApp() {
