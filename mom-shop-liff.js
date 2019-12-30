@@ -2,7 +2,6 @@ window.onload = function() {
 
     let liffId = "1653700382-njRd4e6k";
     initializeLiffOrDie(liffId);
-    document.getElementById("stepLIFF").innerHTML = 'window.onload'
 
 };
 
@@ -19,34 +18,29 @@ function initializeLiffOrDie(liffId) {
 
 function initializeLiff(liffId) {
 
-    if (liff.getOS() == 'web') {
-        liff
-        .init({
-            liffId: liffId
-        })
-        .then(() => {
-            initializeApp();
-        })
-        .catch((err) => {
-            console.log(err)
-            document.getElementById("liffErrorMessage").innerHTML = err
-            document.getElementById("liffAppContent").classList.add('hidden');
-            document.getElementById("liffErrorMessage").classList.remove('hidden');
-        });
-    } else {
-        document.getElementById("stepLIFF").innerHTML = 'initializeLiff Mobile'
-        initializeApp();
-    }
+    // liff
+    //     .init({
+    //         liffId: liffId
+    //     })
+    //     .then(() => {
+    //         initializeApp();
+    //     })
+    //     .catch((err) => {
+    //         console.log(err)
+    //         document.getElementById("liffErrorMessage").innerHTML = err
+    //         document.getElementById("liffAppContent").classList.add('hidden');
+    //         document.getElementById("liffErrorMessage").classList.remove('hidden');
+    //     });
+    initializeApp();
 }
 
 function initializeApp() {
-    document.getElementById("stepLIFF").innerHTML = 'initializeApp'
     
     displayLiffData();
-    // displayIsInClientInfo();
     registerButtonHandlers();
 
     // check if the user is logged in/out, and disable inappropriate button
+    document.getElementById("isLoggedIn").innerHTML = liff.isLoggedIn()
     if (liff.isLoggedIn()) {
         document.getElementById('liffLoginButton').disabled = true;
     } else {
@@ -60,10 +54,9 @@ function displayLiffData() {
 
 function registerButtonHandlers() {
 
-    document.getElementById("stepLIFF").innerHTML = 'registerButtonHandlers'
-
     // get profile call
     document.getElementById('getProfileButton').addEventListener('click', function() {
+        document.getElementById("isLoggedIn").innerHTML = 'getProfileButton click'
         liff.getProfile().then(function(profile) {
             document.getElementById('userIdProfileField').textContent = profile.userId;
             document.getElementById('displayNameField').textContent = profile.displayName;
